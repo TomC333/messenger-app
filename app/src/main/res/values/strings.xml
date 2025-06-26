@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">MessengerApp</string>
+
+    <string name="sign_up_button_label_text">Not registered?</string>
+    <string name="sign_up_button_text">SIGN UP</string>
+    <string name="sign_in_button_text">SIGN IN</string>
+    <string name="sing_out_button_text">SIGN OUT</string>
+
+    <string name="update_button_text">UPDATE</string>
+
+    <string name="username_field_hint">Enter your nickname</string>
+    <string name="password_field_hint">Enter your password</string>
+    <string name="profession_field_hint">What I do</string>
+
+    <string name="search_field_hint">Search</string>
+
+
+
+
+
 </resources>
