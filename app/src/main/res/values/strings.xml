@@ -5,6 +5,7 @@
     <string name="sign_up_button_text">SIGN UP</string>
     <string name="sign_in_button_text">SIGN IN</string>
     <string name="sing_out_button_text">SIGN OUT</string>
+    <string name="close_button_text">CLOSE</string>
 
     <string name="update_button_text">UPDATE</string>
 
@@ -14,8 +15,5 @@
 
     <string name="search_field_hint">Search</string>
 
-
-
-
-
+    <string name="avatar_image_description">Avatar image</string>
 </resources>

@@ -3,9 +3,12 @@ package com.sgvas21.ddadi21.messengerapp.data.repository
 import com.google.firebase.firestore.FirebaseFirestore
 import com.sgvas21.ddadi21.messengerapp.data.model.User
 import kotlinx.coroutines.tasks.await
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class UserRepositoryImpl(
-    private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
+@Singleton
+class UserRepositoryImpl @Inject constructor(
+    val firestore: FirebaseFirestore
 ): UserRepository {
 
     private val userCollection = firestore.collection("users")
@@ -28,7 +31,7 @@ class UserRepositoryImpl(
 
     override suspend fun getUser(username: String): User? {
         val snapshot = userCollection.document(username).get().await()
-        return snapshot.toObject(User::class.java);
+        return snapshot.toObject(User::class.java)
     }
 
     override suspend fun updateUser(user: User)  {

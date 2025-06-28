@@ -1,9 +1,12 @@
+import org.gradle.kotlin.dsl.implementation
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
 
-    // Add the Google services Gradle plugin
-    id("com.google.gms.google-services")
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.google.services)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -40,6 +43,8 @@ android {
 
     buildFeatures {
         viewBinding = true
+        //noinspection DataBindingWithoutKapt
+        dataBinding = true
     }
 }
 
@@ -56,10 +61,17 @@ dependencies {
 
     // Firebase imports
     implementation(platform(libs.firebase.bom))
-
     implementation(libs.firebase.analytics)
-
     implementation(libs.firebase.database.ktx)
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.storage.ktx)
+    implementation(libs.androidx.fragment.ktx)
+
+    // Hilt
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+
+    // Lifecycle, viewmodel and LiveData
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
 }
