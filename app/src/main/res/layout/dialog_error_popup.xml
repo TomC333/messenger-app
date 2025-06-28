@@ -6,14 +6,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="24dp"
-        android:background="@drawable/bg_rounded_white">
+        android:background="@drawable/bg_error_popup">
 
         <TextView
             android:id="@+id/tvErrorMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@android:color/holo_red_dark"
-            android:textSize="@dimen/error_text_size"
+            android:textSize="@dimen/size_error_text"
             android:text=""
             android:gravity="center"
             android:textAlignment="center"

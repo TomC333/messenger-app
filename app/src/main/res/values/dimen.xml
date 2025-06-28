@@ -1,4 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="error_text_size">16sp</dimen>
+    <!--    Text Sizes    -->
+    <dimen name="size_error_text">16sp</dimen>
+    <dimen name="size_button_text">24sp</dimen>
+
+    <!--    Margins    -->
+    <dimen name="margin_top_avatar">64dp</dimen>
+    <dimen name="margin_bottom_avatar">32dp</dimen>
+
+    <dimen name="margin_bottom_input_text">8dp</dimen>
+    <dimen name="margin_horizontal_input_text">16dp</dimen>
+
+    <dimen name="margin_top_button_signup">48dp</dimen>
+    <dimen name="margin_top_button_signin">32dp</dimen>
+
+    <!--    Radius    -->
+    <dimen name="radius_input_bg">32dp</dimen>
+
+    <dimen name="radius_error_popup_bg">16dp</dimen>
+
+    <dimen name="radius_button_bg">8dp</dimen>
+    <dimen name="radius_secondary_button_bg">8dp</dimen>
+
+    <!--    Paddings    -->
+    <dimen name="padding_input_text">8dp</dimen>
+
+    <dimen name="padding_button_text_horizontal">16dp</dimen>
+    <dimen name="padding_button_text_vertical">4dp</dimen>
+
+    <!--    Image Sizes    -->
+    <dimen name="size_avatar">176dp</dimen>
 </resources>
