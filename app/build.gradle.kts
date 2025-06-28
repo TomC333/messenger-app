@@ -60,4 +60,6 @@ dependencies {
     implementation(libs.firebase.analytics)
 
     implementation(libs.firebase.database.ktx)
+    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.storage.ktx)
 }
