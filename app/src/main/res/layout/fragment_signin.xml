@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/imgSignup"
+        android:layout_width="@dimen/size_avatar"
+        android:layout_height="@dimen/size_avatar"
+        android:src="@drawable/avatar_image_placeholder"
+        android:contentDescription="@string/avatar_image_description"
+        android:layout_marginTop="@dimen/margin_top_avatar"
+        android:layout_marginBottom="@dimen/margin_bottom_avatar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/username"/>
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:hint="@string/username_field_hint"
+        android:inputType="text"
+        android:layout_marginBottom="@dimen/margin_bottom_input_text"
+        android:layout_marginHorizontal="@dimen/margin_horizontal_input_text"
+        android:background="@drawable/bg_input"
+        android:padding="@dimen/padding_input_text"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/imgSignup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/password"/>
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:hint="@string/password_field_hint"
+        android:inputType="textPassword"
+        android:layout_marginBottom="@dimen/margin_bottom_input_text"
+        android:layout_marginHorizontal="@dimen/margin_horizontal_input_text"
+        android:background="@drawable/bg_input"
+        android:padding="@dimen/padding_input_text"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/username"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnSignin"/>
+
+
+    <Button
+        android:id="@+id/btnSignin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:textSize="@dimen/size_button_text"
+        android:text="@string/sign_in_button_text"
+        android:textColor="@color/white"
+        android:layout_marginTop="@dimen/margin_top_button_signin"
+        android:paddingVertical="@dimen/padding_button_text_vertical"
+        android:paddingHorizontal="@dimen/padding_button_text_horizontal"
+        android:background="@drawable/bg_button"
+        app:layout_constraintTop_toBottomOf="@id/password"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textNotRegistered"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_up_button_label_text"
+        app:layout_constraintBottom_toTopOf="@id/btnGoToSignup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btnGoToSignup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:text="@string/sign_up_button_text"
+        android:textColor="@color/color_secondary_buttons_text"
+        android:background="@drawable/bg_secondary_button"
+        android:paddingVertical="@dimen/padding_button_text_vertical"
+        android:paddingHorizontal="@dimen/padding_button_text_horizontal"
+        android:layout_marginBottom="@dimen/margin_bottom_secondary_button_signup"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.sgvas21.ddadi21.messengerapp.R
-import com.sgvas21.ddadi21.messengerapp.databinding.FragmentSignupBinding
+import com.sgvas21.ddadi21.messengerapp.databinding.FragmentSigninBinding
 import com.sgvas21.ddadi21.messengerapp.ui.MainFragment
 import com.sgvas21.ddadi21.messengerapp.ui.components.ErrorPopup
 import com.sgvas21.ddadi21.messengerapp.utils.SessionManager
@@ -19,37 +19,43 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class SignupFragment : Fragment() {
-    private var _binding: FragmentSignupBinding? = null
+class SigninFragment: Fragment() {
+    private var _binding: FragmentSigninBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: SignupViewModel by viewModels()
+    private val viewModel: SigninViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentSignupBinding.inflate(inflater, container, false)
+        _binding = FragmentSigninBinding.inflate(inflater, container, false)
         return binding.root
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         var currentUsername = ""
 
-        binding.btnSignup.setOnClickListener {
+        binding.btnSignin.setOnClickListener {
             val username = binding.username.text.toString().trim()
             val password = binding.password.text.toString().trim()
-            val profession = binding.profession.text.toString().trim()
 
             currentUsername = username
 
-            viewModel.signup(username, password, profession)
+            viewModel.signin(username, password)
+        }
+
+        binding.btnGoToSignup.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_view, SignupFragment())
+                .commit()
         }
 
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.signupState.collectLatest { result ->
+                viewModel.signinState.collectLatest { result ->
                     result?.let {
                         if(it.isSuccess) {
                             SessionManager.saveSignedIn(requireContext(), true)

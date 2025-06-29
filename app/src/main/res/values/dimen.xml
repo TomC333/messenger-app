@@ -14,6 +14,9 @@
     <dimen name="margin_top_button_signup">48dp</dimen>
     <dimen name="margin_top_button_signin">32dp</dimen>
 
+
+    <dimen name="margin_bottom_secondary_button_signup">16dp</dimen>
+
     <!--    Radius    -->
     <dimen name="radius_input_bg">32dp</dimen>
 
