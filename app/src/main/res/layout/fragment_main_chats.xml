@@ -65,32 +65,30 @@
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/conversationRecyclerView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:layout_marginBottom="56dp"-->
-<!--        app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
-<!--        android:clipToPadding="false"-->
-<!--        android:paddingBottom="72dp" />-->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="100dp"
+        android:clipToPadding="false">
+
+        <!-- Scrollable content -->
+
+    </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:fabCradleMargin="10dp"
-        app:fabCradleRoundedCornerRadius="10dp"
-        app:fabCradleVerticalOffset="6dp"
-        android:backgroundTint="@android:color/white">
+        app:hideOnScroll="true">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNav"
+            android:id="@+id/bottomNavigationView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:menu="@menu/bottom_nav_menu"
             android:background="@android:color/transparent"
-            app:itemIconTint="@color/selector_nav_item"/>
+            app:itemIconTint="@color/selector_nav_item"
+            app:menu="@menu/bottom_nav_menu"/>
 
     </com.google.android.material.bottomappbar.BottomAppBar>
 
@@ -98,8 +96,8 @@
         android:id="@+id/fabAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
-        android:layout_marginBottom="28dp"
-        android:src="@android:drawable/ic_input_add"
-        app:backgroundTint="@color/color_background_blue" />
+        android:backgroundTint="@color/color_background_blue"
+        app:srcCompat="@drawable/plus_solid"
+        app:tint="@color/white"
+        app:layout_anchor="@id/bottomAppBar" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
