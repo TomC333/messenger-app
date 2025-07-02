@@ -11,8 +11,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.sgvas21.ddadi21.messengerapp.R
 import com.sgvas21.ddadi21.messengerapp.databinding.FragmentSigninBinding
-import com.sgvas21.ddadi21.messengerapp.ui.MainFragment
 import com.sgvas21.ddadi21.messengerapp.ui.components.ErrorPopup
+import com.sgvas21.ddadi21.messengerapp.ui.mainScreens.MainChatsFragment
 import com.sgvas21.ddadi21.messengerapp.utils.SessionManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -61,7 +61,7 @@ class SigninFragment: Fragment() {
                             SessionManager.saveSignedIn(requireContext(), true)
                             SessionManager.saveUsername(requireContext(), currentUsername)
                             parentFragmentManager.beginTransaction()
-                                .replace(R.id.fragment_container_view, MainFragment())
+                                .replace(R.id.fragment_container_view, MainChatsFragment())
                                 .commit()
                         }else {
                             ErrorPopup.show(requireActivity(), it.exceptionOrNull()?.message ?: "Unknown error")

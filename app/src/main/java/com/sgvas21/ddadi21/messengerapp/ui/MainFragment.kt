@@ -5,37 +5,75 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.viewpager2.widget.ViewPager2
 import com.sgvas21.ddadi21.messengerapp.R
+import com.sgvas21.ddadi21.messengerapp.adapters.MainPagerAdapter
 import com.sgvas21.ddadi21.messengerapp.databinding.FragmentMainBinding
 import com.sgvas21.ddadi21.messengerapp.ui.auth.SigninFragment
-import com.sgvas21.ddadi21.messengerapp.ui.auth.SignupFragment
 import com.sgvas21.ddadi21.messengerapp.utils.SessionManager
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainFragment: Fragment() {
+class MainFragment : Fragment() {
+
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
+    private lateinit var pagerAdapter: MainPagerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.btnSignOut.setOnClickListener {
-            SessionManager.saveSignedIn(requireContext(), false)
-            SessionManager.clear(requireContext())
-            requireActivity().recreate()
+        super.onViewCreated(view, savedInstanceState)
+        setupViewPager()
+        setupBottomNavigation()
+    }
 
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container_view, SigninFragment())
-                .commit()
+    private fun setupViewPager() {
+        pagerAdapter = MainPagerAdapter(this)
+        binding.viewPager.adapter = pagerAdapter
+
+        binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                when (position) {
+                    0 -> binding.bottomNavigationView.selectedItemId = R.id.nav_home
+                    1 -> binding.bottomNavigationView.selectedItemId = R.id.nav_profile
+                }
+            }
+        })
+    }
+
+    private fun setupBottomNavigation() {
+        binding.bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    binding.viewPager.currentItem = 0
+                    true
+                }
+                R.id.nav_profile -> {
+                    binding.viewPager.currentItem = 1
+                    true
+                }
+                else -> false
+            }
         }
+    }
+
+    fun signOut() {
+        SessionManager.saveSignedIn(requireContext(), false)
+        SessionManager.clear(requireContext())
+        requireActivity().recreate()
+
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container_view, SigninFragment())
+            .commit()
     }
 
     override fun onDestroyView() {

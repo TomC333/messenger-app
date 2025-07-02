@@ -16,4 +16,6 @@
     <color name="unselected_color">#666666</color>
 
 
+    <color name="gray">#C2C2C2FF</color>
+
 </resources>
