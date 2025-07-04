@@ -32,4 +32,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    fun handleSignOut() {
+        SessionManager.saveSignedIn(this, false)
+        SessionManager.clear(this)
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container_view, SigninFragment())
+            .commit()
+    }
 }

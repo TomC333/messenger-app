@@ -44,4 +44,29 @@ class UserRepositoryImpl @Inject constructor(
 
         userDoc.set(user).await()
     }
+
+    override suspend fun usernameExists(username: String): Boolean {
+        return try {
+            val user = getUser(username)
+            user != null
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    override suspend fun deleteUser(username: String) {
+        val usernameDoc = usernameCollection.document(username)
+        val userDoc = userCollection.document(username)
+
+        firestore.runTransaction { transaction ->
+            val userSnapshot = transaction.get(userDoc)
+            if (!userSnapshot.exists()) {
+                throw Exception("User with username '$username' does not exist.")
+            }
+
+            transaction.delete(userDoc)
+            transaction.delete(usernameDoc)
+        }.await()
+    }
+
 }

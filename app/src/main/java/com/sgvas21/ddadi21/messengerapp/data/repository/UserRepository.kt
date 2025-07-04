@@ -36,4 +36,25 @@ interface UserRepository {
      * @throws Exception if the update operation fails or the user doesn't exists.
      */
     suspend fun updateUser(user: User)
+
+    /**
+     * Checks if a username already exists in the database.
+     *
+     * This method is used to determine whether a user with the given username is
+     * already registered in the system. It helps ensure username uniqueness during
+     * user creation or updates.
+     *
+     * @param username The username to check for existence.
+     * @return True if the username exists, false otherwise.
+     * @throws Exception if the operation fails due to network or database errors.
+     */
+    suspend fun usernameExists(username: String): Boolean
+
+    /**
+     * Deletes a user profile by username.
+     *
+     * @param username The username of the user to delete.
+     * @throws Exception if the user does not exist or deletion fails.
+     */
+    suspend fun deleteUser(username: String)
 }
