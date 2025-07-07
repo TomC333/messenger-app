@@ -6,13 +6,14 @@
         android:id="@+id/nav_home"
         android:icon="@drawable/house_solid"
         android:title=""
-        android:contentDescription="@string/home_page"
-        app:showAsAction="ifRoom" />
+        android:contentDescription="@string/home_page" />
+
+    <item android:id="@+id/placeholder"
+        android:title=""/>
 
     <item
         android:id="@+id/nav_profile"
         android:icon="@drawable/gear_solid"
         android:title=""
-        android:contentDescription="@string/profile_page"
-        app:showAsAction="ifRoom" />
+        android:contentDescription="@string/profile_page" />
 </menu>

@@ -1,16 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="@dimen/margin_layout_bottom"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/profileName"
@@ -19,27 +16,24 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/profileImage"
-            android:layout_width="280dp"
-            android:layout_height="280dp"
-            android:layout_marginTop="80dp"
+            android:layout_width="@dimen/size_profile_image"
+            android:layout_height="@dimen/size_profile_image"
+            android:layout_marginTop="@dimen/margin_image_top"
             android:src="@drawable/avatar_image_placeholder"
             app:shapeAppearanceOverlay="@style/CircleImageView" />
-
-
     </LinearLayout>
 
     <EditText
         android:id="@+id/profileName"
         android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginBottom="24dp"
-        android:autofillHints=""
+        android:layout_height="@dimen/height_input_edittext"
+        android:layout_marginHorizontal="@dimen/margin_profile_edittext_horizontal"
+        android:layout_marginBottom="@dimen/margin_profile_edittext_bottom"
         android:background="@drawable/bg_input"
         android:gravity="center"
         android:inputType="text"
         android:text="@string/sample"
-        android:textSize="24sp"
+        android:textSize="@dimen/text_size_profile_name"
         app:layout_constraintBottom_toTopOf="@+id/profileRole"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -47,15 +41,14 @@
     <EditText
         android:id="@+id/profileRole"
         android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginBottom="52dp"
-        android:autofillHints=""
+        android:layout_height="@dimen/height_input_edittext"
+        android:layout_marginHorizontal="@dimen/margin_profile_edittext_horizontal"
+        android:layout_marginBottom="@dimen/margin_profile_edittext_bottom2"
         android:background="@drawable/bg_input"
         android:gravity="center"
         android:inputType="text"
         android:text="@string/sample"
-        android:textSize="24sp"
+        android:textSize="@dimen/text_size_profile_role"
         app:layout_constraintBottom_toTopOf="@+id/btnUpdate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -64,12 +57,11 @@
         android:id="@+id/btnUpdate"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="@dimen/margin_btn_update_bottom"
         android:backgroundTint="@color/color_background_blue"
         android:text="@string/update"
         app:layout_constraintBottom_toTopOf="@+id/btnSignOut"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -77,14 +69,12 @@
         style="@style/Widget.Material3.Button.OutlinedButton"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="88dp"
+        android:layout_marginBottom="@dimen/margin_btn_signout_bottom"
         android:text="@string/sign_out"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="@dimen/text_size_signout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:strokeColor="@color/black" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

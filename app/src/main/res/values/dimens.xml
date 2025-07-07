@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Text Sizes -->
+    <dimen name="size_error_text">16sp</dimen>
+    <dimen name="size_button_text">24sp</dimen>
+    <dimen name="text_size_profile_name">24sp</dimen>
+    <dimen name="text_size_profile_role">24sp</dimen>
+    <dimen name="text_size_signout">16sp</dimen>
+    <dimen name="text_size_chat_name">14sp</dimen>
+    <dimen name="text_size_chat_time">12sp</dimen>
+    <dimen name="text_size_chat_message">13sp</dimen>
+    <dimen name="text_size_username">18sp</dimen>
+    <dimen name="text_size_role">14sp</dimen>
+
+    <!-- Margins -->
+    <dimen name="margin_top_avatar">64dp</dimen>
+    <dimen name="margin_bottom_avatar">32dp</dimen>
+    <dimen name="margin_bottom_input_text">8dp</dimen>
+    <dimen name="margin_horizontal_input_text">16dp</dimen>
+    <dimen name="margin_top_button_signup">48dp</dimen>
+    <dimen name="margin_top_button_signin">32dp</dimen>
+    <dimen name="margin_bottom_secondary_button_signup">16dp</dimen>
+    <dimen name="margin_profile_edittext_horizontal">24dp</dimen>
+    <dimen name="margin_profile_edittext_bottom">24dp</dimen>
+    <dimen name="margin_profile_edittext_bottom2">52dp</dimen>
+    <dimen name="margin_btn_update_bottom">32dp</dimen>
+    <dimen name="margin_btn_signout_bottom">88dp</dimen>
+    <dimen name="margin_layout_bottom">36dp</dimen>
+    <dimen name="margin_image_top">80dp</dimen>
+    <dimen name="margin_card">16dp</dimen>
+    <dimen name="margin_end_chat_avatar">12dp</dimen>
+    <dimen name="margin_start_chat_name">12dp</dimen>
+    <dimen name="margin_end_chat_name">8dp</dimen>
+    <dimen name="margin_top_chat_message">16dp</dimen>
+    <dimen name="margin_end_search_avatar">16dp</dimen>
+    <dimen name="margin_bottom_username">2dp</dimen>
+
+    <!-- Radius -->
+    <dimen name="radius_input_bg">32dp</dimen>
+    <dimen name="radius_error_popup_bg">16dp</dimen>
+    <dimen name="radius_button_bg">8dp</dimen>
+    <dimen name="radius_secondary_button_bg">8dp</dimen>
+    <dimen name="radius_search_card">28dp</dimen>
+
+    <!-- Paddings -->
+    <dimen name="padding_input_text">8dp</dimen>
+    <dimen name="padding_button_text_horizontal">16dp</dimen>
+    <dimen name="padding_button_text_vertical">4dp</dimen>
+    <dimen name="padding_search_bar">16dp</dimen>
+    <dimen name="padding_start_search_icon">12dp</dimen>
+    <dimen name="padding_back_button_horizontal">8dp</dimen>
+    <dimen name="padding_search_card_start">16dp</dimen>
+    <dimen name="padding_search_card_start_icon">16dp</dimen>
+
+    <!-- Image Sizes -->
+    <dimen name="size_avatar">176dp</dimen>
+    <dimen name="size_profile_image">280dp</dimen>
+    <dimen name="size_chat_avatar">40dp</dimen>
+    <dimen name="size_search_avatar">60dp</dimen>
+    <dimen name="size_icon_24">24dp</dimen>
+    <dimen name="size_icon_40">40dp</dimen>
+    <dimen name="height_top_bar">73dp</dimen>
+    <dimen name="height_input_edittext">48dp</dimen>
+    <dimen name="height_appbar">240dp</dimen>
+</resources>
