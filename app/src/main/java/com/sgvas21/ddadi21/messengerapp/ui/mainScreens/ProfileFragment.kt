@@ -35,7 +35,6 @@ class ProfileFragment : Fragment() {
             selectedImageUri = uri
             binding.profileImage.setImageURI(uri)
 
-            // Upload the image to Firebase Storage
             currentUser?.let { user ->
                 viewModel.uploadProfileImage(uri, user)
             }
@@ -138,7 +137,6 @@ class ProfileFragment : Fragment() {
             viewModel.isLoading.collect { isLoading ->
                 binding.btnUpdate.isEnabled = !isLoading
                 binding.btnSignOut.isEnabled = !isLoading
-                // Also disable profile image selection during loading
                 binding.profileImage.isEnabled = !isLoading
             }
         }

@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.sgvas21.ddadi21.messengerapp.R
 import com.sgvas21.ddadi21.messengerapp.databinding.FragmentMainChatsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,6 +29,17 @@ class MainChatsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         observeViewModel()
+        binding.searchBar.setOnClickListener {
+            navigateToSearch()
+        }
+    }
+
+    private fun navigateToSearch() {
+        val searchFragment = SearchFragment()
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container_view, searchFragment)
+            .addToBackStack(null)
+            .commit()
     }
 
     private fun setupRecyclerView() {

@@ -57,4 +57,23 @@ interface UserRepository {
      * @throws Exception if the user does not exist or deletion fails.
      */
     suspend fun deleteUser(username: String)
+
+    /**
+     * Retrieves all user profiles from the database.
+     *
+     * @return A list of all user objects.
+     * @throws Exception on failure to retrieve data.
+     */
+    suspend fun getAllUsers(): List<User>
+
+    /**
+     * Searches for user profiles whose usernames contain the given query string.
+     *
+     * This method performs a case-insensitive search.
+     *
+     * @param query The search string.
+     * @return A list of [User] objects matching the search query.
+     * @throws Exception on failure to retrieve data.
+     */
+    suspend fun searchUsers(query: String): List<User>
 }

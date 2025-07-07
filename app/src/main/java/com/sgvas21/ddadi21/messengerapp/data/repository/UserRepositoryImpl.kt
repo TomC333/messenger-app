@@ -69,4 +69,46 @@ class UserRepositoryImpl @Inject constructor(
         }.await()
     }
 
+    /**
+     * Retrieves all user profiles from the database.
+     * Fetches all documents from the "users" collection.
+     *
+     * @return A list of all user objects.
+     * @throws Exception on failure to retrieve data.
+     */
+    override suspend fun getAllUsers(): List<User> {
+        return try {
+            val querySnapshot = userCollection.get().await()
+            querySnapshot.documents.mapNotNull { it.toObject(User::class.java) }
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
+
+    /**
+     * Searches for user profiles whose usernames contain the given query string.
+     *
+     * IMPORTANT: Firestore does not support "contains" queries directly.
+     * This implementation fetches ALL users and filters them in memory.
+     * For large datasets, consider a dedicated search service (e.g., Algolia).
+     *
+     * @param query The search string.
+     * @return A list of [User] objects matching the search query.
+     * @throws Exception on failure to retrieve data.
+     */
+    override suspend fun searchUsers(query: String): List<User> {
+        return try {
+            if (query.isBlank()) {
+                return getAllUsers()
+            }
+
+            val lowerCaseQuery = query.lowercase()
+            val allUsers = getAllUsers()
+
+            allUsers.filter { it.username.lowercase().contains(lowerCaseQuery) }
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
+
 }
