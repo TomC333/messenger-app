@@ -74,53 +74,26 @@ class ProfileFragment : Fragment() {
     private fun setupUpdateButton() {
         binding.btnUpdate.setOnClickListener {
             currentUser?.let { user ->
-                showUpdateDialog(user)
+                val newUsername = binding.profileName.text.toString().trim()
+                val newProfession = binding.profileRole.text.toString().trim()
+
+                if (newUsername.isNotEmpty() && newProfession.isNotEmpty()) {
+                    if (newUsername != user.username) {
+                        // If username has changed, check for uniqueness
+                        viewModel.checkUsernameAndAttemptUpdate(user, newUsername, newProfession)
+                    } else {
+                        // If username hasn't changed, just update profession (or other fields)
+                        val updatedUser = user.copy(
+                            username = newUsername,
+                            profession = newProfession
+                        )
+                        viewModel.updateUserInfo(updatedUser)
+                    }
+                } else {
+                    Toast.makeText(requireContext(), "Username and profession cannot be empty", Toast.LENGTH_SHORT).show()
+                }
             }
         }
-    }
-
-    private fun showUpdateDialog(user: User) {
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Update Profile")
-
-        val layout = LinearLayout(requireContext())
-        layout.orientation = LinearLayout.VERTICAL
-        layout.setPadding(50, 40, 50, 10)
-
-        val usernameEdit = EditText(requireContext())
-        usernameEdit.hint = "Username"
-        usernameEdit.setText(user.username)
-        // Enable username editing
-        usernameEdit.isEnabled = true
-        layout.addView(usernameEdit)
-
-        val professionEdit = EditText(requireContext())
-        professionEdit.hint = "Profession"
-        professionEdit.setText(user.profession)
-        layout.addView(professionEdit)
-
-        builder.setView(layout)
-
-        builder.setPositiveButton("Update") { _, _ ->
-            val newUsername = usernameEdit.text.toString().trim()
-            val newProfession = professionEdit.text.toString().trim()
-
-            if (newUsername.isNotEmpty() && newProfession.isNotEmpty()) {
-                val updatedUser = user.copy(
-                    username = newUsername,
-                    profession = newProfession
-                )
-                viewModel.updateUserInfo(updatedUser)
-            } else {
-                Toast.makeText(requireContext(), "Username and profession cannot be empty", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-        builder.setNegativeButton("Cancel") { dialog, _ ->
-            dialog.dismiss()
-        }
-
-        builder.show()
     }
 
     private fun observeViewModel() {
@@ -138,6 +111,8 @@ class ProfileFragment : Fragment() {
                 binding.btnUpdate.isEnabled = !isLoading
                 binding.btnSignOut.isEnabled = !isLoading
                 binding.profileImage.isEnabled = !isLoading
+                binding.profileName.isEnabled = !isLoading // Enable/disable editing
+                binding.profileRole.isEnabled = !isLoading // Enable/disable editing
             }
         }
 
@@ -158,11 +133,20 @@ class ProfileFragment : Fragment() {
                 }
             }
         }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.usernameExists.collect { exists ->
+                if (exists) {
+                    Toast.makeText(requireContext(), "Username already taken. Please choose a different one.", Toast.LENGTH_SHORT).show()
+                    viewModel.clearUsernameExists()
+                }
+            }
+        }
     }
 
     private fun updateUI(user: User) {
-        binding.profileName.text = user.username
-        binding.profileRole.text = user.profession
+        // Set the text directly to EditText fields
+        binding.profileName.setText(user.username)
+        binding.profileRole.setText(user.profession)
 
         binding.profileImage.load(user.profileImageUrl) {
             placeholder(R.drawable.avatar_image_placeholder)

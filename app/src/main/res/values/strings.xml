@@ -19,5 +19,9 @@
 
     <string name="home_page">home page</string>
     <string name="profile_page">profile page</string>
+    <string name="update">Update</string>
+    <string name="sign_out">SIGN OUT</string>
+    <string name="sample">sample</string>
+    <string name="_5_min">5 min</string>
 
 </resources>

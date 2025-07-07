@@ -52,7 +52,7 @@
                     android:background="@null"
                     android:hint="Search"
                     android:paddingStart="12dp"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/black"
                     android:inputType="text"
                     android:maxLines="1"
                     android:imeOptions="actionSearch" />

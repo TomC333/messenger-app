@@ -11,7 +11,9 @@ import com.sgvas21.ddadi21.messengerapp.domain.usecase.UpdateUserUseCase
 import com.sgvas21.ddadi21.messengerapp.utils.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -36,6 +38,9 @@ class ProfileViewModel @Inject constructor(
 
     private val _updateSuccess = MutableStateFlow(false)
     val updateSuccess: StateFlow<Boolean> = _updateSuccess.asStateFlow()
+
+    private val _usernameExists = MutableSharedFlow<Boolean>()
+    val usernameExists: SharedFlow<Boolean> = _usernameExists
 
     init {
         getUserDocs()
@@ -67,9 +72,9 @@ class ProfileViewModel @Inject constructor(
     }
 
     fun updateUserInfo(updatedUser: User) {
-        val currentUsername = SessionManager.getUsername(context)
-        if (currentUsername == null) {
-            _error.value = "No current username found"
+        val currentUsernameInSession = SessionManager.getUsername(context)
+        if (currentUsernameInSession == null) {
+            _error.value = "No current username found in session"
             return
         }
 
@@ -79,11 +84,11 @@ class ProfileViewModel @Inject constructor(
             _updateSuccess.value = false
 
             try {
-                updateUserUseCase(updatedUser, currentUsername)
+                updateUserUseCase(updatedUser, currentUsernameInSession)
                 _userState.value = updatedUser
                 _updateSuccess.value = true
 
-                if (updatedUser.username != currentUsername) {
+                if (updatedUser.username != currentUsernameInSession) {
                     SessionManager.saveUsername(context, updatedUser.username)
                 }
             } catch (e: Exception) {
@@ -93,6 +98,33 @@ class ProfileViewModel @Inject constructor(
             }
         }
     }
+
+    fun checkUsernameAndAttemptUpdate(currentUser: User, newUsername: String, newProfession: String) {
+        viewModelScope.launch {
+            _isLoading.value = true
+            _error.value = null
+            _usernameExists.emit(false)
+
+            try {
+                val existingUserWithNewUsername = getUserUseCase(newUsername)
+
+               if (existingUserWithNewUsername != null && existingUserWithNewUsername.username != currentUser.username) {
+                    _usernameExists.emit(true)
+                } else {
+                    val updatedUser = currentUser.copy(
+                        username = newUsername,
+                        profession = newProfession
+                    )
+                    updateUserInfo(updatedUser)
+                }
+            } catch (e: Exception) {
+                _error.value = "Error checking username: ${e.message}"
+            } finally {
+                _isLoading.value = false
+            }
+        }
+    }
+
 
     fun uploadProfileImage(uri: Uri, user: User) {
         val currentUsername = SessionManager.getUsername(context)
@@ -137,5 +169,11 @@ class ProfileViewModel @Inject constructor(
 
     fun clearUpdateSuccess() {
         _updateSuccess.value = false
+    }
+
+    fun clearUsernameExists() {
+        viewModelScope.launch {
+            _usernameExists.emit(false)
+        }
     }
 }
