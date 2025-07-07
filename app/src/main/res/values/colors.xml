@@ -2,6 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gray">#C2C2C2FF</color>
+    <color name="text_background">#491E1F22</color>
+    <color name="transparent">#00FFFFFF</color>
 
     <color name="color_input_bg">#F3F6FF</color>
     <color name="color_input_text">#E4E6EF</color>
@@ -14,7 +17,5 @@
 
     <color name="selected_color">#604CEF</color>
     <color name="unselected_color">#666666</color>
-
-    <color name="gray">#C2C2C2FF</color>
 
 </resources>
