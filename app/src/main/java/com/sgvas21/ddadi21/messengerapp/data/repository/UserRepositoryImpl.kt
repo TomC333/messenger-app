@@ -49,7 +49,7 @@ class UserRepositoryImpl @Inject constructor(
         return try {
             val user = getUser(username)
             user != null
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             false
         }
     }
@@ -80,7 +80,7 @@ class UserRepositoryImpl @Inject constructor(
         return try {
             val querySnapshot = userCollection.get().await()
             querySnapshot.documents.mapNotNull { it.toObject(User::class.java) }
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             emptyList()
         }
     }
@@ -106,7 +106,7 @@ class UserRepositoryImpl @Inject constructor(
             val allUsers = getAllUsers()
 
             allUsers.filter { it.username.lowercase().contains(lowerCaseQuery) }
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             emptyList()
         }
     }

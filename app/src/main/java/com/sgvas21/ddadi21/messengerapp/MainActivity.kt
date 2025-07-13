@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import com.sgvas21.ddadi21.messengerapp.ui.MainFragment
 import com.sgvas21.ddadi21.messengerapp.ui.auth.SigninFragment
 import com.sgvas21.ddadi21.messengerapp.utils.SessionManager
@@ -17,11 +20,14 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
+        // Remove system bards from the view
+        val windowInsetsController = WindowCompat.getInsetsController(window, window.decorView)
+        windowInsetsController.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
+
+
         if (savedInstanceState == null) {
             if (SessionManager.isSignedIn(this)) {
-                val username = SessionManager.getUsername(this)
-                Log.d("MainActivity", "Active user: $username")
-
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container_view, MainFragment())
                     .commit()

@@ -12,30 +12,30 @@
        android:layout_marginBottom="?attr/actionBarSize"
        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-   <com.google.android.material.bottomappbar.BottomAppBar
-       android:id="@+id/bottomAppBar"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_gravity="bottom"
-       app:hideOnScroll="true">
+<!--   <com.google.android.material.bottomappbar.BottomAppBar-->
+<!--       android:id="@+id/bottomAppBar"-->
+<!--       android:layout_width="match_parent"-->
+<!--       android:layout_height="wrap_content"-->
+<!--       android:layout_gravity="bottom"-->
+<!--       app:hideOnScroll="true">-->
 
-      <com.google.android.material.bottomnavigation.BottomNavigationView
-          android:id="@+id/bottomNavigationView"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:background="@color/transparent"
-          app:itemIconTint="@color/selector_nav_item"
-          app:menu="@menu/bottom_nav_menu" />
+<!--      <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--          android:id="@+id/bottomNavigationView"-->
+<!--          android:layout_width="match_parent"-->
+<!--          android:layout_height="match_parent"-->
+<!--          android:background="@color/transparent"-->
+<!--          app:itemIconTint="@color/selector_nav_item"-->
+<!--          app:menu="@menu/bottom_nav_menu" />-->
 
-   </com.google.android.material.bottomappbar.BottomAppBar>
+<!--   </com.google.android.material.bottomappbar.BottomAppBar>-->
 
-   <com.google.android.material.floatingactionbutton.FloatingActionButton
-       android:id="@+id/fabAdd"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:backgroundTint="@color/color_background_blue"
-       app:srcCompat="@drawable/plus_solid"
-       app:tint="@color/white"
-       app:layout_anchor="@id/bottomAppBar" />
+<!--   <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--       android:id="@+id/fabAdd"-->
+<!--       android:layout_width="wrap_content"-->
+<!--       android:layout_height="wrap_content"-->
+<!--       android:backgroundTint="@color/color_background_blue"-->
+<!--       app:srcCompat="@drawable/plus_solid"-->
+<!--       app:tint="@color/white"-->
+<!--       app:layout_anchor="@id/bottomAppBar" />-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

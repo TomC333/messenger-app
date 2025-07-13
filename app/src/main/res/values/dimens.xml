@@ -5,7 +5,7 @@
     <dimen name="size_button_text">24sp</dimen>
     <dimen name="text_size_profile_name">24sp</dimen>
     <dimen name="text_size_profile_role">24sp</dimen>
-    <dimen name="text_size_signout">16sp</dimen>
+    <dimen name="text_size_sign_out">16sp</dimen>
     <dimen name="text_size_chat_name">14sp</dimen>
     <dimen name="text_size_chat_time">12sp</dimen>
     <dimen name="text_size_chat_message">13sp</dimen>
@@ -19,12 +19,12 @@
     <dimen name="margin_horizontal_input_text">16dp</dimen>
     <dimen name="margin_top_button_signup">48dp</dimen>
     <dimen name="margin_top_button_signin">32dp</dimen>
-    <dimen name="margin_bottom_secondary_button_signup">16dp</dimen>
+    <dimen name="margin_bottom_secondary_button_signup">24dp</dimen>
     <dimen name="margin_profile_edittext_horizontal">24dp</dimen>
     <dimen name="margin_profile_edittext_bottom">24dp</dimen>
     <dimen name="margin_profile_edittext_bottom2">52dp</dimen>
-    <dimen name="margin_btn_update_bottom">32dp</dimen>
-    <dimen name="margin_btn_signout_bottom">88dp</dimen>
+    <dimen name="margin_btn_update_top">16dp</dimen>
+    <dimen name="margin_btn_sign_out_bottom">88dp</dimen>
     <dimen name="margin_layout_bottom">36dp</dimen>
     <dimen name="margin_image_top">80dp</dimen>
     <dimen name="margin_card">16dp</dimen>
@@ -62,4 +62,7 @@
     <dimen name="height_top_bar">73dp</dimen>
     <dimen name="height_input_edittext">48dp</dimen>
     <dimen name="height_appbar">240dp</dimen>
+
+    <!-- Heights -->
+    <dimen name="min_input_height">48dp</dimen>
 </resources>

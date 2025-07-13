@@ -43,27 +43,27 @@ class MainFragment : Fragment() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 when (position) {
-                    0 -> binding.bottomNavigationView.selectedItemId = R.id.nav_home
-                    1 -> binding.bottomNavigationView.selectedItemId = R.id.nav_profile
+//                    0 -> binding.bottomNavigationView.selectedItemId = R.id.nav_home
+//                    1 -> binding.bottomNavigationView.selectedItemId = R.id.nav_profile
                 }
             }
         })
     }
 
     private fun setupBottomNavigation() {
-        binding.bottomNavigationView.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.nav_home -> {
-                    binding.viewPager.currentItem = 0
-                    true
-                }
-                R.id.nav_profile -> {
-                    binding.viewPager.currentItem = 1
-                    true
-                }
-                else -> false
-            }
-        }
+//        binding.bottomNavigationView.setOnItemSelectedListener { item ->
+//            when (item.itemId) {
+//                R.id.nav_home -> {
+//                    binding.viewPager.currentItem = 0
+//                    true
+//                }
+//                R.id.nav_profile -> {
+//                    binding.viewPager.currentItem = 1
+//                    true
+//                }
+//                else -> false
+//            }
+//        }
     }
 
     fun signOut() {

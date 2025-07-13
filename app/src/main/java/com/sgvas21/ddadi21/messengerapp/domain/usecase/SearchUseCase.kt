@@ -22,7 +22,7 @@ class SearchUseCase @Inject constructor(
     suspend fun execute(query: String): List<User> {
         return try {
             userRepository.searchUsers(query)
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             emptyList()
         }
     }

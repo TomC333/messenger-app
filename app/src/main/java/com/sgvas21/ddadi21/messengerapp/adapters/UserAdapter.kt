@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.bumptech.glide.Glide
 import com.sgvas21.ddadi21.messengerapp.R
 import com.sgvas21.ddadi21.messengerapp.data.model.User
 import com.sgvas21.ddadi21.messengerapp.databinding.FragmentSearchObjectBinding
@@ -47,12 +48,15 @@ class UserAdapter : ListAdapter<User, UserAdapter.UserViewHolder>(UserDiffCallba
             binding.username.text = user.username
             binding.role.text = user.profession
 
-            binding.profileImage.load(user.profileImageUrl) {
-                placeholder(R.drawable.avatar_image_placeholder)
-                error(R.drawable.avatar_image_placeholder)
-            }
+            Glide.with(binding.profileImage.context)
+                .load(user.profileImageUrl)
+                .placeholder(R.drawable.avatar_image_placeholder)
+                .error(R.drawable.avatar_image_placeholder)
+                .circleCrop()
+                .into(binding.profileImage)
         }
     }
+
 
     /**
      * DiffCallback for efficient RecyclerView updates.

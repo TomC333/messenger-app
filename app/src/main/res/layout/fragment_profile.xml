@@ -1,80 +1,104 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:foregroundGravity="center_horizontal">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_layout_bottom"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/profileName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:maxWidth="488dp">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/profileImage"
-            android:layout_width="@dimen/size_profile_image"
-            android:layout_height="@dimen/size_profile_image"
-            android:layout_marginTop="@dimen/margin_image_top"
+            android:layout_width="@dimen/size_avatar"
+            android:layout_height="@dimen/size_avatar"
             android:src="@drawable/avatar_image_placeholder"
+            android:contentDescription="@string/avatar_image_description"
+            android:layout_marginTop="@dimen/margin_top_avatar"
+            android:layout_marginBottom="@dimen/margin_bottom_avatar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/profileName"
             app:shapeAppearanceOverlay="@style/CircleImageView" />
-    </LinearLayout>
 
-    <EditText
-        android:id="@+id/profileName"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/height_input_edittext"
-        android:layout_marginHorizontal="@dimen/margin_profile_edittext_horizontal"
-        android:layout_marginBottom="@dimen/margin_profile_edittext_bottom"
-        android:background="@drawable/bg_input"
-        android:gravity="center"
-        android:inputType="text"
-        android:text="@string/sample"
-        android:textSize="@dimen/text_size_profile_name"
-        app:layout_constraintBottom_toTopOf="@+id/profileRole"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <EditText
+            android:id="@+id/profileName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/min_input_height"
+            android:autofillHints=""
+            android:text="@string/sample"
+            android:inputType="text"
+            android:layout_marginBottom="@dimen/margin_bottom_input_text"
+            android:layout_marginHorizontal="@dimen/margin_horizontal_input_text"
+            android:background="@drawable/bg_input"
+            android:padding="@dimen/padding_input_text"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/profileImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/profileRole"
+            tools:ignore="LabelFor" />
 
-    <EditText
-        android:id="@+id/profileRole"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/height_input_edittext"
-        android:layout_marginHorizontal="@dimen/margin_profile_edittext_horizontal"
-        android:layout_marginBottom="@dimen/margin_profile_edittext_bottom2"
-        android:background="@drawable/bg_input"
-        android:gravity="center"
-        android:inputType="text"
-        android:text="@string/sample"
-        android:textSize="@dimen/text_size_profile_role"
-        app:layout_constraintBottom_toTopOf="@+id/btnUpdate"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <EditText
+            android:id="@+id/profileRole"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/min_input_height"
+            android:autofillHints=""
+            android:text="@string/sample"
+            android:inputType="text"
+            android:layout_marginBottom="@dimen/margin_bottom_input_text"
+            android:layout_marginHorizontal="@dimen/margin_horizontal_input_text"
+            android:background="@drawable/bg_input"
+            android:padding="@dimen/padding_input_text"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/profileName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/btnUpdate"
+            tools:ignore="LabelFor" />
 
-    <Button
-        android:id="@+id/btnUpdate"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_btn_update_bottom"
-        android:backgroundTint="@color/color_background_blue"
-        android:text="@string/update"
-        app:layout_constraintBottom_toTopOf="@+id/btnSignOut"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <Button
+            android:id="@+id/btnUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="0dp"
+            android:minWidth="140dp"
+            android:textSize="@dimen/size_button_text"
+            android:text="@string/update"
+            android:textColor="@color/white"
+            android:layout_marginTop="@dimen/margin_btn_update_top"
+            android:paddingVertical="@dimen/padding_button_text_vertical"
+            android:paddingHorizontal="@dimen/padding_button_text_horizontal"
+            android:background="@drawable/bg_button"
+            app:layout_constraintTop_toBottomOf="@id/profileRole"
+            app:layout_constraintBottom_toTopOf="@id/btnSignOut"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/btnSignOut"
-        style="@style/Widget.Material3.Button.OutlinedButton"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_btn_signout_bottom"
-        android:text="@string/sign_out"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_signout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:strokeColor="@color/black" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/btnSignOut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="0dp"
+            android:minWidth="140dp"
+            android:text="@string/sign_out"
+            android:textSize="@dimen/size_button_text"
+            android:textColor="@color/color_secondary_buttons_text"
+            android:background="@drawable/bg_secondary_button"
+            android:paddingVertical="@dimen/padding_button_text_vertical"
+            android:paddingHorizontal="@dimen/padding_button_text_horizontal"
+            android:layout_marginTop="@dimen/margin_btn_update_top"
+            app:layout_constraintTop_toBottomOf="@id/btnUpdate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

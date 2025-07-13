@@ -1,3 +1,4 @@
+
 import org.gradle.kotlin.dsl.implementation
 
 plugins {
@@ -76,4 +77,7 @@ dependencies {
     // Lifecycle, viewmodel and LiveData
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+
+    implementation(libs.glide)
+    ksp(libs.ksp)
 }
