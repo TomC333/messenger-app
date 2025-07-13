@@ -24,5 +24,6 @@
     <string name="sample">sample</string>
     <string name="_5_min">5 min</string>
     <string name="search">Search</string>
+    <string name="plus_button_description">+</string>
 
 </resources>

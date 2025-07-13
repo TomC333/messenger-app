@@ -8,8 +8,12 @@
         android:title=""
         android:contentDescription="@string/home_page" />
 
-    <item android:id="@+id/placeholder"
-        android:title=""/>
+    <item
+        android:id="@+id/nav_dummy"
+        android:icon="@android:color/transparent"
+        android:title=""
+        android:enabled="false" />
+
 
     <item
         android:id="@+id/nav_profile"

@@ -1,6 +1,7 @@
 package com.sgvas21.ddadi21.messengerapp.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,6 +34,10 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupViewPager()
         setupBottomNavigation()
+
+        binding.fabAdd.setOnClickListener {
+            Log.d("MainFragment", "FAB (+) button clicked")
+        }
     }
 
     private fun setupViewPager() {
@@ -43,27 +48,27 @@ class MainFragment : Fragment() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 when (position) {
-//                    0 -> binding.bottomNavigationView.selectedItemId = R.id.nav_home
-//                    1 -> binding.bottomNavigationView.selectedItemId = R.id.nav_profile
+                    0 -> binding.bottomNavigationView.selectedItemId = R.id.nav_home
+                    1 -> binding.bottomNavigationView.selectedItemId = R.id.nav_profile
                 }
             }
         })
     }
 
     private fun setupBottomNavigation() {
-//        binding.bottomNavigationView.setOnItemSelectedListener { item ->
-//            when (item.itemId) {
-//                R.id.nav_home -> {
-//                    binding.viewPager.currentItem = 0
-//                    true
-//                }
-//                R.id.nav_profile -> {
-//                    binding.viewPager.currentItem = 1
-//                    true
-//                }
-//                else -> false
-//            }
-//        }
+        binding.bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    binding.viewPager.currentItem = 0
+                    true
+                }
+                R.id.nav_profile -> {
+                    binding.viewPager.currentItem = 1
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     fun signOut() {
