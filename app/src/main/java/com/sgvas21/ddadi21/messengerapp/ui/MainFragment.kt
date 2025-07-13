@@ -11,6 +11,7 @@ import com.sgvas21.ddadi21.messengerapp.R
 import com.sgvas21.ddadi21.messengerapp.adapters.MainPagerAdapter
 import com.sgvas21.ddadi21.messengerapp.databinding.FragmentMainBinding
 import com.sgvas21.ddadi21.messengerapp.ui.auth.SigninFragment
+import com.sgvas21.ddadi21.messengerapp.ui.mainScreens.SearchFragment
 import com.sgvas21.ddadi21.messengerapp.utils.SessionManager
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,14 +33,22 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setupViewPager()
         setupBottomNavigation()
-
-        binding.fabAdd.setOnClickListener {
-            Log.d("MainFragment", "FAB (+) button clicked")
-        }
+        setupFabAdd()
     }
 
+    private fun setupFabAdd() {
+        binding.fabAdd.setOnClickListener {
+            val searchFragment = SearchFragment()
+
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_view, searchFragment)
+                .addToBackStack(null)
+                .commit()
+        }
+    }
     private fun setupViewPager() {
         pagerAdapter = MainPagerAdapter(this)
         binding.viewPager.adapter = pagerAdapter

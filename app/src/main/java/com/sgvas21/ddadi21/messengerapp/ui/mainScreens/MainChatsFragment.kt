@@ -27,19 +27,10 @@ class MainChatsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setupRecyclerView()
         observeViewModel()
-        binding.searchBar.setOnClickListener {
-            navigateToSearch()
-        }
-    }
 
-    private fun navigateToSearch() {
-        val searchFragment = SearchFragment()
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container_view, searchFragment)
-            .addToBackStack(null)
-            .commit()
     }
 
     private fun setupRecyclerView() {

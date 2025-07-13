@@ -25,5 +25,8 @@
     <string name="_5_min">5 min</string>
     <string name="search">Search</string>
     <string name="plus_button_description">+</string>
+    <string name="search_icon">search</string>
+    <string name="search_background">background</string>
+    <string name="lookup_icon_description">lookup</string>
 
 </resources>
