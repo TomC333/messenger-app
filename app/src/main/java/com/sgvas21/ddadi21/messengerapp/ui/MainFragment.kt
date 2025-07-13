@@ -71,16 +71,6 @@ class MainFragment : Fragment() {
         }
     }
 
-    fun signOut() {
-        SessionManager.saveSignedIn(requireContext(), false)
-        SessionManager.clear(requireContext())
-        requireActivity().recreate()
-
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container_view, SigninFragment())
-            .commit()
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
