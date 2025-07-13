@@ -13,7 +13,6 @@ import com.sgvas21.ddadi21.messengerapp.R
 import com.sgvas21.ddadi21.messengerapp.databinding.FragmentSigninBinding
 import com.sgvas21.ddadi21.messengerapp.ui.MainFragment
 import com.sgvas21.ddadi21.messengerapp.ui.components.ErrorPopup
-import com.sgvas21.ddadi21.messengerapp.ui.mainScreens.MainChatsFragment
 import com.sgvas21.ddadi21.messengerapp.utils.SessionManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest

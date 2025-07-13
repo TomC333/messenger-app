@@ -2,7 +2,7 @@ package com.sgvas21.ddadi21.messengerapp.ui.auth
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sgvas21.ddadi21.messengerapp.domain.usecase.SigninUserUseCase
+import com.sgvas21.ddadi21.messengerapp.domain.usecase.user.SigninUserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

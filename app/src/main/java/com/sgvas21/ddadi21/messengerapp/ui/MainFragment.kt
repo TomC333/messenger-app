@@ -1,7 +1,6 @@
 package com.sgvas21.ddadi21.messengerapp.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +9,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.sgvas21.ddadi21.messengerapp.R
 import com.sgvas21.ddadi21.messengerapp.adapters.MainPagerAdapter
 import com.sgvas21.ddadi21.messengerapp.databinding.FragmentMainBinding
-import com.sgvas21.ddadi21.messengerapp.ui.auth.SigninFragment
-import com.sgvas21.ddadi21.messengerapp.ui.mainScreens.SearchFragment
-import com.sgvas21.ddadi21.messengerapp.utils.SessionManager
+import com.sgvas21.ddadi21.messengerapp.ui.search.SearchFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -1,4 +1,4 @@
-package com.sgvas21.ddadi21.messengerapp.domain.usecase
+package com.sgvas21.ddadi21.messengerapp.domain.usecase.user
 
 import com.sgvas21.ddadi21.messengerapp.data.repository.UserRepository
 import com.sgvas21.ddadi21.messengerapp.utils.PasswordUtils

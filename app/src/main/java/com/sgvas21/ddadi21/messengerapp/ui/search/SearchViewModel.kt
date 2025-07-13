@@ -1,11 +1,14 @@
-package com.sgvas21.ddadi21.messengerapp.ui.mainScreens
+package com.sgvas21.ddadi21.messengerapp.ui.search
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sgvas21.ddadi21.messengerapp.data.model.User
-import com.sgvas21.ddadi21.messengerapp.domain.usecase.SearchUseCase
+import com.sgvas21.ddadi21.messengerapp.domain.usecase.chat.CreateChatUseCase
+import com.sgvas21.ddadi21.messengerapp.domain.usecase.chat.GetChatByIdUseCase
+import com.sgvas21.ddadi21.messengerapp.domain.usecase.user.SearchUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -21,7 +24,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val searchUseCase: SearchUseCase
+    private val searchUseCase: SearchUseCase,
+    private val getChatByIdUseCase: GetChatByIdUseCase,
+    private val createChatUseCase: CreateChatUseCase
 ) : ViewModel() {
 
     private val _searchQuery = MutableStateFlow("")
@@ -34,7 +39,7 @@ class SearchViewModel @Inject constructor(
         setupSearchFlow()
     }
 
-    @OptIn(FlowPreview::class)
+    @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
     private fun setupSearchFlow() {
         _searchQuery
             .debounce(300)
@@ -59,5 +64,16 @@ class SearchViewModel @Inject constructor(
      */
     fun setSearchQuery(query: String) {
         _searchQuery.value = query
+    }
+
+    suspend fun getOrCreateChatId(currentUser: String, otherUser: String): String {
+        val sortedId = listOf(currentUser, otherUser).sorted().joinToString("_")
+
+        val existingChat = getChatByIdUseCase(sortedId)
+        return if (existingChat != null) {
+            sortedId
+        } else {
+            createChatUseCase(currentUser, otherUser)
+        }
     }
 }

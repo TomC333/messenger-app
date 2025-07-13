@@ -14,9 +14,9 @@ import com.sgvas21.ddadi21.messengerapp.databinding.FragmentSearchObjectBinding
 /**
  * RecyclerView adapter for displaying a list of User objects.
  */
-class UserAdapter : ListAdapter<User, UserAdapter.UserViewHolder>(UserDiffCallback()) {
-
-    var onItemClickListener: ((User) -> Unit)? = null
+class UserAdapter(
+    private val onUserClick: (User) -> Unit
+) : ListAdapter<User, UserAdapter.UserViewHolder>(UserDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val binding = FragmentSearchObjectBinding.inflate(
@@ -35,15 +35,6 @@ class UserAdapter : ListAdapter<User, UserAdapter.UserViewHolder>(UserDiffCallba
     inner class UserViewHolder(private val binding: FragmentSearchObjectBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        init {
-            binding.root.setOnClickListener {
-                val position = adapterPosition
-                if (position != RecyclerView.NO_POSITION) {
-                    onItemClickListener?.invoke(getItem(position))
-                }
-            }
-        }
-
         fun bind(user: User) {
             binding.username.text = user.username
             binding.role.text = user.profession
@@ -54,20 +45,21 @@ class UserAdapter : ListAdapter<User, UserAdapter.UserViewHolder>(UserDiffCallba
                 .error(R.drawable.avatar_image_placeholder)
                 .circleCrop()
                 .into(binding.profileImage)
+
+            binding.root.setOnClickListener {
+                onUserClick(user)
+            }
         }
     }
 
-
     /**
-     * DiffCallback for efficient RecyclerView updates.
+     * DiffUtil callback for efficient list updates.
      */
     class UserDiffCallback : DiffUtil.ItemCallback<User>() {
-        override fun areItemsTheSame(oldItem: User, newItem: User): Boolean {
-            return oldItem.username == newItem.username
-        }
+        override fun areItemsTheSame(oldItem: User, newItem: User): Boolean =
+            oldItem.username == newItem.username
 
-        override fun areContentsTheSame(oldItem: User, newItem: User): Boolean {
-            return oldItem == newItem
-        }
+        override fun areContentsTheSame(oldItem: User, newItem: User): Boolean =
+            oldItem == newItem
     }
 }

@@ -1,4 +1,4 @@
-package com.sgvas21.ddadi21.messengerapp.ui.mainScreens
+package com.sgvas21.ddadi21.messengerapp.ui.profile
 
 import android.content.Context
 import android.net.Uri
@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.storage.FirebaseStorage
 import com.sgvas21.ddadi21.messengerapp.data.model.User
-import com.sgvas21.ddadi21.messengerapp.domain.usecase.GetUserUseCase
-import com.sgvas21.ddadi21.messengerapp.domain.usecase.UpdateUserUseCase
+import com.sgvas21.ddadi21.messengerapp.domain.usecase.user.GetUserUseCase
+import com.sgvas21.ddadi21.messengerapp.domain.usecase.user.UpdateUserUseCase
 import com.sgvas21.ddadi21.messengerapp.utils.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext

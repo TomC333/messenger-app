@@ -28,5 +28,9 @@
     <string name="search_icon">search</string>
     <string name="search_background">background</string>
     <string name="lookup_icon_description">lookup</string>
+    <string name="send_btn_text">Send</string>
+    <string name="message_input_hint">Message</string>
+    <string name="chat_username">Username</string>
+    <string name="back_icon">back</string>
 
 </resources>
