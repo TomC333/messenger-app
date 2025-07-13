@@ -9,6 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_input"
+        android:backgroundTint="@color/color_background_blue_gray"
         android:minWidth="300dp"
         android:orientation="vertical"
         android:padding="12dp"
@@ -26,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="end"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@android:color/black"
             android:textSize="12sp"
             android:layout_marginTop="4dp" />
     </LinearLayout>

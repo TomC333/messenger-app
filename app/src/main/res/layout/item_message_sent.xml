@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:minWidth="300dp"
         android:background="@drawable/bg_input"
+        android:backgroundTint="@color/color_background_blue"
         android:orientation="vertical"
         android:padding="12dp"
         tools:ignore="UselessParent">
