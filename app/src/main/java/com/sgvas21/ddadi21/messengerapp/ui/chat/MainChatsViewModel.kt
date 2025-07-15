@@ -1,62 +1,83 @@
 package com.sgvas21.ddadi21.messengerapp.ui.chat
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sgvas21.ddadi21.messengerapp.data.model.Chat
 import com.sgvas21.ddadi21.messengerapp.data.model.ChatPreview
-import com.sgvas21.ddadi21.messengerapp.domain.usecase.chat.GetChatsForUserUseCase
-import com.sgvas21.ddadi21.messengerapp.domain.usecase.user.GetUserUseCase
+import com.sgvas21.ddadi21.messengerapp.data.repository.ChatRepository
+import com.sgvas21.ddadi21.messengerapp.data.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MainChatsViewModel @Inject constructor(
-    private val getChatsForUserUseCase: GetChatsForUserUseCase,
-    private val getUserUseCase: GetUserUseCase,
+    private val chatRepository: ChatRepository,
+    private val userRepository: UserRepository
 ) : ViewModel() {
 
     private val _chatPreviews = MutableLiveData<List<ChatPreview>>()
     val chatPreviews: LiveData<List<ChatPreview>> = _chatPreviews
 
-    fun loadChats(currentUser: String) {
+    private val _filteredChatPreviews = MutableLiveData<List<ChatPreview>>()
+    val filteredChatPreviews: LiveData<List<ChatPreview>> = _filteredChatPreviews
+
+    private var currentSearchQuery = ""
+    private var allChatPreviews = emptyList<ChatPreview>()
+
+    fun loadChats(username: String) {
         viewModelScope.launch {
-            getChatsForUserUseCase(currentUser).collect { chats ->
-                val otherUsernames = chats.mapNotNull { chat ->
-                    val participants = chat.chatId.split('_')
-                    participants.firstOrNull { it != currentUser && it.isNotBlank() }
-                }.distinct()
-
-                if (otherUsernames.isEmpty()) {
-                    _chatPreviews.value = emptyList()
-                    return@collect
+            chatRepository.getChatsForUser(username)
+                .catch { e ->
+                    // Handle error
                 }
+                .collect { chats ->
+                    val previews = chats.mapNotNull { chat ->
+                        val otherUsername = chat.participants.firstOrNull { it != username }
 
-                val userProfiles = otherUsernames.mapNotNull { username ->
-                    try {
-                        getUserUseCase(username)
-                    } catch (_: Exception) {
-                        null
+                        if (otherUsername.isNullOrEmpty()) {
+                            return@mapNotNull null
+                        }
+
+                        try {
+                            val otherUser = userRepository.getUser(otherUsername)
+                            ChatPreview(
+                                chat = chat,
+                                otherUserName = otherUsername,
+                                otherUserImageUrl = otherUser?.profileImageUrl ?: ""
+                            )
+                        } catch (e: Exception) {
+                            ChatPreview(
+                                chat = chat,
+                                otherUserName = otherUsername,
+                                otherUserImageUrl = ""
+                            )
+                        }
                     }
+
+                    allChatPreviews = previews
+                    _chatPreviews.value = previews
+
+                    // Apply current search filter
+                    filterChats(currentSearchQuery)
                 }
+        }
+    }
 
-                val userImagesMap = userProfiles.associateBy({ it.username }, { it.profileImageUrl })
+    fun filterChats(query: String) {
+        currentSearchQuery = query
 
-                val previews = chats.mapNotNull { chat ->
-                    val otherUser = chat.chatId.split('_').firstOrNull { it != currentUser }
-                    if (otherUser != null && otherUser.isNotBlank()) {
-                        ChatPreview(
-                            chat = chat,
-                            otherUserName = otherUser,
-                            otherUserImageUrl = userImagesMap[otherUser].orEmpty()
-                        )
-                    } else null
-                }
-
-                _chatPreviews.value = previews
+        val filteredList = if (query.isEmpty() || query.length < 3) {
+            allChatPreviews
+        } else {
+            allChatPreviews.filter { chatPreview ->
+                chatPreview.otherUserName.contains(query, ignoreCase = true)
             }
         }
+
+        _filteredChatPreviews.value = filteredList
     }
 }
