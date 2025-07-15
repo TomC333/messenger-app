@@ -1,5 +1,6 @@
 package com.sgvas21.ddadi21.messengerapp.ui.search
 
+import android.app.Application
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -7,6 +8,7 @@ import com.sgvas21.ddadi21.messengerapp.data.model.User
 import com.sgvas21.ddadi21.messengerapp.domain.usecase.chat.CreateChatUseCase
 import com.sgvas21.ddadi21.messengerapp.domain.usecase.chat.GetChatByIdUseCase
 import com.sgvas21.ddadi21.messengerapp.domain.usecase.user.SearchUseCase
+import com.sgvas21.ddadi21.messengerapp.utils.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -26,7 +28,8 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(
     private val searchUseCase: SearchUseCase,
     private val getChatByIdUseCase: GetChatByIdUseCase,
-    private val createChatUseCase: CreateChatUseCase
+    private val createChatUseCase: CreateChatUseCase,
+    private val app: Application
 ) : ViewModel() {
 
     private val _searchQuery = MutableStateFlow("")
@@ -41,6 +44,7 @@ class SearchViewModel @Inject constructor(
 
     @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
     private fun setupSearchFlow() {
+        val currentUsername = SessionManager.getUsername(app.applicationContext)
         _searchQuery
             .debounce(300)
             .distinctUntilChanged()
@@ -51,9 +55,8 @@ class SearchViewModel @Inject constructor(
                 flow { emit(searchUseCase.execute(query)) }
             }
             .onEach { results ->
-                _searchResults.value = results
-                Log.d("SearchViewModel", "Received ${results.size} search results for query: ${_searchQuery.value}")
-
+                _searchResults.value = results.filter { it.username != currentUsername }
+                Log.d("SearchViewModel", "Filtered results, excluding current user: $currentUsername")
             }
             .launchIn(viewModelScope)
     }
