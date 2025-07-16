@@ -1,15 +1,19 @@
 package com.sgvas21.ddadi21.messengerapp.ui.chat
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.sgvas21.ddadi21.messengerapp.R
 import com.sgvas21.ddadi21.messengerapp.adapters.ChatAdapter
 import com.sgvas21.ddadi21.messengerapp.databinding.FragmentChatBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,6 +56,7 @@ class ChatFragment : Fragment() {
         setupToolbar()
         setupRecyclerView()
         setupMessageSending()
+        setupMessageInputWatcher()
         observeMessages()
 
         viewModel.startListening(chatId)
@@ -93,6 +98,26 @@ class ChatFragment : Fragment() {
                 Toast.makeText(requireContext(), "Enter a message", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun setupMessageInputWatcher() {
+        binding.etMessage.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                updateSendButtonColor(s?.toString()?.trim().isNullOrEmpty().not())
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        updateSendButtonColor(false)
+    }
+
+    private fun updateSendButtonColor(hasText: Boolean) {
+        val colorRes = if (hasText) R.color.selected_color else R.color.gray
+        val color = ContextCompat.getColor(requireContext(), colorRes)
+        binding.btnSend.backgroundTintList = android.content.res.ColorStateList.valueOf(color)
     }
 
     private fun observeMessages() {
